@@ -1,3 +1,45 @@
 Briefly explain the vulnerability and why the secure version prevents the vulnerability.
 Which CIA property does tampering violate?
 What additional security mechanisms can you incorporate?
+
+----------------------------------------------------------------------------------------------------
+
+In the vulnerable version the application takes user input (username from the query string) and
+directly uses it in a database query without any form of validation or sanitation.
+This is problematic because a malicious user could craft a username that manipulates the query
+to perform unintended actions, such as unauthorized data access.
+
+The secure version introduces two key defenses against NoSQL injection:
+
+Input Validation: It checks if the username is a string. This simple check ensures that
+structured query objects are not accepted as valid input, preventing a wide range of injection
+attacks that rely on passing objects or arrays.
+
+Input Sanitization: The code sanitizes the username by removing non-alphanumeric characters with
+the regex /[^\w\s]/gi. This further restricts the attacker's ability to inject malicious query
+operators or scripts, as many injection techniques rely on special characters to modify the query
+structure or execute code.
+
+----------------------------------------------------------------------------------------------------
+
+CIA Property Violated
+The vulnerability primarily violates the Confidentiality and Integrity aspects of the CIA
+(Confidentiality, Integrity, Availability) triad:
+
+Confidentiality is compromised because an attacker could potentially gain unauthorized access
+to sensitive information stored in the database.
+
+Integrity is at risk because the attacker could manipulate database queries to alter data.
+
+----------------------------------------------------------------------------------------------------
+
+Additional Security Mechanisms
+
+Use Parameterized Queries: Always use parameterized queries or ORM/ODM methods that inherently
+handle input safely and prevent injection.
+
+Implement Rate Limiting: To prevent brute force attacks, rate limiting on sensitive endpoints can
+reduce the attack surface.
+
+Two-Factor Authentication (2FA): For sensitive actions, require a second form of verification.
+This doesn't directly impact the vulnerability in question but adds an additional security layer.

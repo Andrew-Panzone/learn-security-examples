@@ -1,0 +1,24 @@
+The vulnerability in the first code snippet lies in its flawed authentication and authorization
+checks for updating a user's role. It relies on client-supplied data (userId from the request body)
+to identify the user attempting the action and to check if they have the 'admin' role required for
+authorization.
+
+The secure version introduces session-based authentication, which significantly improves security.
+
+----------------------------------------------------------------------------------------------------
+
+Role-based Access Control (RBAC): Implement a more granular role-based access control system that
+explicitly defines permissions for different roles within the application.
+
+Input Validation: Always validate and sanitize inputs to prevent injection attacks. Even though
+the revised code addresses the authentication and authorization flaw, ensuring that inputs like
+userId and newRole are of expected types and formats can prevent other types of vulnerabilities.
+
+HTTPS: Use HTTPS to encrypt data in transit, protecting session IDs and other sensitive information
+from being intercepted.
+
+Secure Session Configuration: Ensure sessions are configured securely by setting the httpOnly and
+secure flags for cookies, which prevent access to session cookies via JavaScript and ensure cookies
+are only sent over HTTPS, respectively.
+
+Session Timeout: Implement session expiration or timeouts to reduce the risk of session hijacking.

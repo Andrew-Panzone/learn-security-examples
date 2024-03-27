@@ -1,0 +1,31 @@
+Customer to UI
+Spoofing: An attacker could impersonate the UI to capture customer data.
+Tampering: Data sent to/from the UI could be altered in transit.
+Repudiation: Customers or attackers could deny actions performed via the UI.
+Information Disclosure: Sensitive information could be exposed through the UI.
+Denial of Service: The UI could be overwhelmed, denying access to legitimate users.
+Elevation of Privilege: Exploits that allow users to gain higher privileges than intended.
+
+Customer to Identity Service
+Spoofing: Attackers could impersonate customers to gain unauthorized access.
+Tampering: Requests or responses could be altered to manipulate authentication processes.
+Repudiation: Users or attackers could deny authentication attempts.
+Information Disclosure: Leakage of authentication data, like passwords or tokens.
+Denial of Service: Overloading the service to prevent authentication.
+Elevation of Privilege: Exploiting vulnerabilities to gain unauthorized access levels.
+
+UI to BFF (Backend for Frontend)
+Spoofing: Impersonation of the UI or BFF to intercept or manipulate data.
+Tampering: Data being modified in transit between the UI and BFF.
+Repudiation: Either side could deny actions or requests made.
+Information Disclosure: Exposure of sensitive data in requests/responses.
+Denial of Service: Attacks aimed at disabling the BFF, affecting UI functionality.
+Elevation of Privilege: Gaining unauthorized access or performing unauthorized operations through the BFF.
+
+BFF to Customer Service
+Spoofing: An entity could impersonate the BFF to access customer service data.
+Tampering: Altering data exchanged between BFF and customer service.
+Repudiation: Denial of transactions or data exchanges between these services.
+Information Disclosure: Unauthorized access to data being transferred.
+Denial of Service: Disrupting communication, affecting service delivery.
+Elevation of Privilege: Unauthorized access to operations or data beyond intended permissions.

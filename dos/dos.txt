@@ -1,2 +1,30 @@
 - Briefly explain the vulnerability and why the secure version prevents the vulnerability.
 - What additional security mechanisms can you incorporate to prevent such attacks?
+
+The secure code includes an error handling mechanism that catches exceptions during the
+execution of the database query. This addition improves the robustness of the application by
+ensuring that it does not crash when encountering invalid input or other errors during database
+operations. Specifically, if an invalid _id is provided that causes a query execution error
+(for instance, a casting error if the ID does not match the expected format for MongoDB ObjectIds),
+the catch block will handle the exception and respond with a 'Bad input' message.
+
+The vulnerability in the initial code was the potential for NoSQL injection,
+where malicious users could exploit the application's direct use of user input in database queries
+to manipulate the query or access unauthorized data.
+
+The addition of a try-catch block around the database query mitigates the risk of the server
+crashing due to unhandled exceptions (e.g., invalid ObjectId formats), but it does not directly
+address NoSQL injection vulnerabilities. To specifically prevent NoSQL injection, you would need
+to validate and sanitize the input to ensure it conforms to expected patterns or types before using
+it in a query.
+
+----------------------------------------------------------------------------------------------------
+
+Additional Security Mechanisms
+
+Input Validation: Validate the id to ensure it matches the expected format
+(a 24-character hex string for MongoDB ObjectIds) before executing the query.
+
+Limiting Data Exposure: Avoid sending raw database objects directly to the user, as this may
+inadvertently expose sensitive information or implementation details. Instead, selectively send
+only the necessary information.
